@@ -67,6 +67,23 @@ class HashTable:
         else:
             self.hash_table.remove(self.hash_table[index])
 
+    def value(self, index, chained_index=None):
+        item = self.hash_table[index]
+        if isinstance(item, DoubleLinkedList):
+            linked_item = item.linked_gen()
+            if len(linked_item) > 1:
+                linked_item = item.linked_gen()[chained_index + 1]
+            else:
+                linked_item = item.linked_gen()[0]
+            print(linked_item)
+
+        elif item is None:
+            print("That index is a None type")
+            pass
+
+        else:
+            self.hash_table.remove(self.hash_table[index])
+
 if __name__ == '__main__':
     hash_ = HashTable()
     hash_.add("Name", "Akshaj")
@@ -82,5 +99,7 @@ if __name__ == '__main__':
     hash_.ind_remove(0)
     hash_.ind_remove(5, 1)
     hash_.display()
+    hash_.display(show_none=True)
+    hash_.value(5, 1)
 
 
